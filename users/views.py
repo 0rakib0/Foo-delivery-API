@@ -11,7 +11,17 @@ from rest_framework.authtoken.models import Token
 class testAPI(APIView):
     
     def get(self, request, format=None):
-        return Response ({"Name":"Rakibul Hasan"})
+        return Response ({
+            "Health":"Good",
+            "Add Category":"add-category/",
+            "Add Menu Item":"add-menu-item/",
+            "Add Modifier Item":"add-modifier-item/",
+            "Order Place":"order-place/",
+            "Receive Payment":"receive-payment/",
+            "Menu List":"menus/resturent ID (it must be int)/",
+            "Category List":"category/resturent ID (it must be int)/",
+            "Modifier":"modifier/item id (It must be int)/"
+            })
     
 class Register(APIView):
     

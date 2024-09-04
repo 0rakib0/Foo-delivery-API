@@ -71,7 +71,7 @@ class ReceivePayment(APIView):
 
 
 
-@api_view(['GET'])
+@api_view(['GET']) # allow only GET request for this api
 def MenusList(request, resturent_id):
     
     try:
@@ -89,7 +89,7 @@ def MenusList(request, resturent_id):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
+@api_view(['GET']) # allow only GET request for this api
 def CategoryList(resquest, resturent_id):
     
     try:
@@ -108,8 +108,7 @@ def CategoryList(resquest, resturent_id):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-@api_view(['GET'])
-
+@api_view(['GET']) # allow only GET request for this api
 def ModifireList(request, item_id):
     
     try:
