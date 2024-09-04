@@ -2,12 +2,16 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import MenuSerializer, CategorySerializer, ModifierSerializer, OrderSerilizer
-from .models import MenuItem, Category, Modifier, Order
+from .serializers import MenuSerializer, CategorySerializer, ModifierSerializer, OrderSerilizer, PaymentSerializer
+from .models import MenuItem, Category, Modifier, Order, Payment
 from rest_framework import status
+from users.permission import checkUserRaol
+
 # Create your views here.
 
 class AddCategory(APIView):
+    
+    permission_classes = [checkUserRaol]
     
     def post(self, request, format=None):
         category_data = CategorySerializer(data=request.data)
@@ -42,12 +46,22 @@ class AddModifier(APIView):
 class PlaceOrder(APIView):
     def post(self, request, format=None):
         order_data = OrderSerilizer(data=request.data)
-        
         if(order_data.is_valid()):
             order_data.save()
             return Response({"message":"Order Successfully placed!"}, status=status.HTTP_201_CREATED)
         
         return Response(order_data.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class ReceivePayment(APIView):
+    def post(self, request, format=None):
+        payment_data = PaymentSerializer(data=request.data)
+        
+        if(payment_data.is_valid()):
+            payment_data.save()
+            return Response({"message":"Payment successfully receive"}, status=status.HTTP_201_CREATED)
+        
+        return Response(payment_data.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 

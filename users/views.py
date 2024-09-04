@@ -5,7 +5,7 @@ from users.serializers import UserSerializer
 from rest_framework import status
 from .models import User
 from rest_framework.authtoken.models import Token
-# from .permission import checkRequestMethod
+
 # Create your views here.
 
 class testAPI(APIView):
