@@ -19,6 +19,26 @@ class AddCategory(APIView):
 
 
 
+class AddMenuItem(APIView):
+    
+    def post(self, request, format=None):
+        menuItem_data = MenuSerializer(data=request.data)
+        if(menuItem_data.is_valid()):
+            menuItem_data.save()
+            return Response({"message":"Menu Item succcessfully created"}, status=status.HTTP_201_CREATED)
+        return Response(menuItem_data.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class AddModifier(APIView):
+    def post(self, request, format=None):
+        modifire_data = ModifierSerializer(data=request.data)
+        
+        if(modifire_data.is_valid()):
+            modifire_data.save()
+            return Response({"message":"Modifier menu item successfully added"}, status=status.HTTP_201_CREATED)
+        
+        return Response(modifire_data.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 
 
