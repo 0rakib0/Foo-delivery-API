@@ -27,7 +27,7 @@ class Category(models.Model):
 class MenuItem(models.Model):
     name = models.CharField(max_length=260)
     description = models.TextField()
-    print = models.IntegerField()
+    price = models.IntegerField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='item')
     resurent = models.ForeignKey(Resturent, on_delete=models.CASCADE, related_name='resturent')
     

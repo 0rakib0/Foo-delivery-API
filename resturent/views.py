@@ -11,7 +11,7 @@ from users.permission import checkUserRaol
 
 class AddCategory(APIView):
     
-    permission_classes = [checkUserRaol]
+    permission_classes = [checkUserRaol] # apply custom permission 
     
     def post(self, request, format=None):
         category_data = CategorySerializer(data=request.data)
@@ -25,6 +25,8 @@ class AddCategory(APIView):
 
 class AddMenuItem(APIView):
     
+    permission_classes = [checkUserRaol] # apply custom permission
+    
     def post(self, request, format=None):
         menuItem_data = MenuSerializer(data=request.data)
         if(menuItem_data.is_valid()):
@@ -33,6 +35,9 @@ class AddMenuItem(APIView):
         return Response(menuItem_data.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class AddModifier(APIView):
+    
+    permission_classes = [checkUserRaol] # apply custom permission
+    
     def post(self, request, format=None):
         modifire_data = ModifierSerializer(data=request.data)
         

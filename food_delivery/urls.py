@@ -6,5 +6,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('users.urls')),
     path('', include('resturent.urls')),
-    path('api-token-auth/', views.obtain_auth_token)
+    path('login/', views.obtain_auth_token) # auth token buildin routs for login and generet token
 ]

@@ -3,6 +3,8 @@ from .models import MenuItem, Category, Modifier, Order, Payment
 
 
 
+# create all type of serializer here
+
 class MenuSerializer(serializers.ModelSerializer):
     class Meta:
         model = MenuItem

@@ -10,17 +10,15 @@ from rest_framework.authtoken.models import Token
 
 class testAPI(APIView):
     
-    # permission_classes = [checkRequestMethod]
-    
     def get(self, request, format=None):
         return Response ({"Name":"Rakibul Hasan"})
     
 class Register(APIView):
     
     def post(self, request, format=None):
-        userData = UserSerializer(data=request.data)
-        if userData.is_valid():
-            userData.save()
+        userData = UserSerializer(data=request.data) # get user data by post request
+        if userData.is_valid(): # check this data valid or not
+            userData.save()  # if data is valid then save data 
             user = User.objects.get(username=userData.data['username'])
             token_obj, other = Token.objects.get_or_create(user=user)
             return Response({'message':'user successfully register', 'token':str(token_obj)}, status=status.HTTP_201_CREATED)
