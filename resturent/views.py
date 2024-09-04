@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import MenuSerializer, CategorySerializer, ModifierSerializer
-from .models import MenuItem, Category, Modifier
+from .serializers import MenuSerializer, CategorySerializer, ModifierSerializer, OrderSerilizer
+from .models import MenuItem, Category, Modifier, Order
 from rest_framework import status
 # Create your views here.
 
@@ -38,6 +38,16 @@ class AddModifier(APIView):
         
         return Response(modifire_data.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class PlaceOrder(APIView):
+    def post(self, request, format=None):
+        order_data = OrderSerilizer(data=request.data)
+        
+        if(order_data.is_valid()):
+            order_data.save()
+            return Response({"message":"Order Successfully placed!"}, status=status.HTTP_201_CREATED)
+        
+        return Response(order_data.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 

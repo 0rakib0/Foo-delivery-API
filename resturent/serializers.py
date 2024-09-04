@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import MenuItem, Category, Modifier
+from .models import MenuItem, Category, Modifier, Order
 
 
 
@@ -18,4 +18,10 @@ class CategorySerializer(serializers.ModelSerializer):
 class ModifierSerializer(serializers.ModelSerializer):
     class Meta:
         model = Modifier
+        fields = '__all__'
+        
+        
+class OrderSerilizer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
         fields = '__all__'
