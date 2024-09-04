@@ -1,10 +1,26 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
+from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import MenuSerializer, CategorySerializer
-from .models import MenuItem, Category
+from .serializers import MenuSerializer, CategorySerializer, ModifierSerializer
+from .models import MenuItem, Category, Modifier
 from rest_framework import status
 # Create your views here.
+
+class AddCategory(APIView):
+    
+    def post(self, request, format=None):
+        category_data = CategorySerializer(data=request.data)
+        if(category_data.is_valid()):
+            category_data.save()
+            return Response({"message":"category Sccessfully added."}, status=status.HTTP_201_CREATED)
+    
+        return Response(category_data.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
 
 @api_view(['GET'])
 def MenusList(request, resturent_id):
@@ -41,4 +57,22 @@ def CategoryList(resquest, resturent_id):
         return Response({"message":"No Category Found"})
     serializer = CategorySerializer(category, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+
+def ModifireList(request, item_id):
+    
+    try:
+        int(item_id)
+    except ValueError:
+        return Response({"message": "Invalid Item ID. Please provide a numerical ID."}, status=status.HTTP_400_BAD_REQUEST)
+    
+    try:
+        modifire = Modifier.objects.filter(item=item_id)
+    except Modifier.DoesNotExist:
+        return Response({"message":"Modifier Does Not Exist"})
+    
+    serializer = ModifierSerializer(modifire, many=True)
+    return Response(serializer.data)
 

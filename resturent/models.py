@@ -18,7 +18,7 @@ class Resturent(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=160)
     resturent = models.ForeignKey(Resturent, on_delete=models.CASCADE)
-    
+
     
     def __str__(self) -> str:
         return self.name
