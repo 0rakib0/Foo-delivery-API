@@ -50,8 +50,20 @@ python manage.py runserver
 ### Project Documentation
 <hr>
 
-- Item 1
-- Item 2
-- Item 3
+- In this project, there are 2 types of user roles: **Employee** and **Owner**.
+- Only authorized users can access all APIs.
+- Only the **Owner** and **Employee** can manage menus, categories, and modifiers.
+- There is an API for placing orders and receiving payments.
 
 
+### All API Routs
+<hr>
+
+- Add Category- `http://localhost/add-category/`
+- Add Menu Item- `http://localhost/add-menu-item/`
+- Add Modifier Item- `http://localhost/add-modifier-item/`
+- Order Place- `http://localhost/order-place/`
+- Receive Payment- `http://localhost/receive-payment/`
+- Menu List- `http://localhost/menus/resturent_id/` ID must be integer
+- Category List- `http://localhost/category/resturent_id/` ID must be integer
+- Modifier Item List- `http://localhost/modifier/item_id/` ID must be integer
